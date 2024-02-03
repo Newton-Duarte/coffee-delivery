@@ -1,10 +1,15 @@
 import styled from 'styled-components'
 
+import heroBg from '../../assets/hero-background.png'
+
 export const Container = styled.main`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 3.5rem;
   margin: 5.875rem 0;
+  background: url(${heroBg});
+  background-repeat: no-repeat;
+  background-size: cover;
 
   > img {
     justify-self: end;
