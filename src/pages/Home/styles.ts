@@ -2,15 +2,17 @@ import styled from 'styled-components'
 
 import heroBg from '../../assets/hero-background.png'
 
-export const Container = styled.main`
+export const Container = styled.main``
+
+export const HeroWrapper = styled.div`
   background: url(${heroBg});
   background-repeat: no-repeat;
   background-size: cover;
 `
 
-export const Wrapper = styled.div`
+export const Hero = styled.section`
   max-width: 90rem;
-  margin: 5.875rem auto;
+  margin: 5.875rem auto 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 3.5rem;
@@ -22,17 +24,13 @@ export const Wrapper = styled.div`
 `
 
 export const Content = styled.div`
-  h1 {
-    font:
-      800 3rem 'Baloo 2',
-      sans-serif;
-    line-height: 1.3;
+  > h1 {
     max-width: 36.75rem;
     margin-bottom: 1rem;
   }
 
-  p {
-    font-size: 0.875rem;
+  > p {
+    color: ${(props) => props.theme.baseSubtitle};
     max-width: 36.75rem;
   }
 `
@@ -85,4 +83,19 @@ export const InfoItem = styled.div`
       color: ${(props) => props.theme.white};
     }
   }
+`
+
+export const OurCoffees = styled.section`
+  max-width: 90rem;
+  margin: 2rem auto;
+
+  h2 {
+    margin-bottom: 3.5rem;
+  }
+`
+
+export const CoffeesList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem 2rem;
 `
