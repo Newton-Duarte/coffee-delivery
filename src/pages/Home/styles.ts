@@ -3,13 +3,18 @@ import styled from 'styled-components'
 import heroBg from '../../assets/hero-background.png'
 
 export const Container = styled.main`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 3.5rem;
-  margin: 5.875rem 0;
   background: url(${heroBg});
   background-repeat: no-repeat;
   background-size: cover;
+`
+
+export const Wrapper = styled.div`
+  max-width: 90rem;
+  margin: 5.875rem auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3.5rem;
+  padding-bottom: 6.75rem;
 
   > img {
     justify-self: end;
@@ -17,8 +22,6 @@ export const Container = styled.main`
 `
 
 export const Content = styled.div`
-  margin: 0 auto;
-
   h1 {
     font:
       800 3rem 'Baloo 2',
