@@ -10,4 +10,8 @@ export const BaseButton = styled.button`
   align-items: center;
   gap: 0.25rem;
   cursor: pointer;
+
+  &:not(:disabled):hover {
+    background: ${(props) => props.theme.baseHover};
+  }
 `
