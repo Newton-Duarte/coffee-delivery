@@ -8,4 +8,13 @@ export const Container = styled(BaseButton)`
   svg {
     color: ${(props) => props.theme.yellowDark};
   }
+
+  &:not(:disabled):hover {
+    transition: background-color 0.2s;
+    background-color: ${(props) => props.theme.yellowDark};
+
+    svg {
+      color: ${(props) => props.theme.yellowLight};
+    }
+  }
 `

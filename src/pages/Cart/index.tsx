@@ -13,9 +13,15 @@ import cafeImg from '../../assets/cafe-americano.png'
 
 import * as S from './styles'
 import { InputNumber } from '../../components/InputNumber'
+import Success from './components/Success'
+import { useState } from 'react'
 
 export function Cart() {
-  return (
+  const [isSuccess, setIsSuccess] = useState(false)
+
+  return isSuccess ? (
+    <Success />
+  ) : (
     <S.Container>
       <S.CompleteOrder>
         <Title variant="xs">Complete seu pedido</Title>
@@ -134,7 +140,9 @@ export function Cart() {
               </Text>
             </div>
           </S.Total>
-          <S.ConfirmButton>Confirmar Pedido</S.ConfirmButton>
+          <S.ConfirmButton type="button" onClick={() => setIsSuccess(true)}>
+            Confirmar Pedido
+          </S.ConfirmButton>
         </S.OrderItems>
       </S.Order>
     </S.Container>

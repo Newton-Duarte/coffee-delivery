@@ -38,7 +38,7 @@ export const DeliveryAddress = styled.div`
       }
 
       &.uf {
-        width: 15%;
+        width: 17%;
       }
     }
 
@@ -58,6 +58,12 @@ export const SectionHeader = styled.div`
   display: flex;
   gap: 0.5rem;
   border-radius: 6px;
+
+  > div {
+    p:first-of-type {
+      color: ${(props) => props.theme.baseSubtitle};
+    }
+  }
 
   svg {
     color: ${(props) => props.theme.yellowDark};
@@ -94,6 +100,7 @@ export const PaymentButton = styled.button`
   cursor: pointer;
   background: ${(props) => props.theme.baseButton};
   color: ${(props) => props.theme.baseSubtitle};
+  white-space: nowrap;
 
   svg {
     color: ${(props) => props.theme.purple};
@@ -117,6 +124,7 @@ export const OrderItems = styled.div`
   background: ${(props) => props.theme.baseCard};
   border-radius: 6px 44px 6px 44px;
   padding: 2.5rem;
+  margin-top: 1rem;
 `
 
 export const OrderItem = styled.div`
