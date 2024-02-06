@@ -11,7 +11,7 @@ export const HeroWrapper = styled.div`
 `
 
 export const Hero = styled.section`
-  max-width: 90rem;
+  max-width: 70rem;
   margin: 5.875rem auto 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -25,7 +25,6 @@ export const Hero = styled.section`
 
 export const Content = styled.div`
   > h1 {
-    max-width: 36.75rem;
     margin-bottom: 1rem;
   }
 
@@ -86,7 +85,7 @@ export const InfoItem = styled.div`
 `
 
 export const OurCoffees = styled.section`
-  max-width: 90rem;
+  max-width: 70rem;
   margin: 2rem auto;
 
   h2 {

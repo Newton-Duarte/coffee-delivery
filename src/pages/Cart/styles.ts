@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { BaseButton } from '../../components/BaseButton'
 
 export const Container = styled.div`
-  max-width: 90rem;
+  max-width: 70rem;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;

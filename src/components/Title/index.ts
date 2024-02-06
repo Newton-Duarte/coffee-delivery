@@ -41,7 +41,7 @@ function getVariant(variant?: TitleVariant) {
     default:
       return css`
         font:
-          800 3rem/1.3 'Baloo 2',
+          800 2.5rem/1.3 'Baloo 2',
           sans-serif;
       `
   }
@@ -50,5 +50,5 @@ function getVariant(variant?: TitleVariant) {
 export const Title = styled.h1<TitleProps>`
   color: ${(props) => props.theme.baseTitle};
 
-  ${(props) => getVariant(props.variant)}
+  ${(props) => getVariant(props.variant)};
 `
