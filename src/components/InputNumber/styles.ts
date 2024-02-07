@@ -27,7 +27,6 @@ export const Button = styled.button`
 
 export const Input = styled.input.attrs({
   readOnly: true,
-  value: 1,
 })`
   background: transparent;
   border: none;

@@ -1,11 +1,16 @@
+import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
 import { Text } from '../../../../components/Text'
 import { Title } from '../../../../components/Title'
 
 import successImg from '../../../../assets/success.svg'
 
 import * as S from './styles'
-import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
-export default function Success() {
+import { useCart } from '../../../../hooks/useCart'
+import { parsePaymentType } from '../../../../utils/payment'
+
+export function Success() {
+  const { paymentType } = useCart()
+
   return (
     <S.Container>
       <Title>Uhu! Pedido confirmado</Title>
@@ -42,7 +47,7 @@ export default function Success() {
               </div>
               <div>
                 <Text variant="md">
-                  Pagamento na entrega <br /> Cartão de Crédito
+                  Pagamento na entrega <br /> {parsePaymentType(paymentType)}
                 </Text>
               </div>
             </div>

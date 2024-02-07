@@ -9,15 +9,25 @@ import {
 import { Title } from '../../components/Title'
 import { Text } from '../../components/Text'
 
-import cafeImg from '../../assets/cafe-americano.png'
-
-import * as S from './styles'
+import { Success } from './components/Success'
 import { InputNumber } from '../../components/InputNumber'
-import Success from './components/Success'
 import { useState } from 'react'
+import { useCart } from '../../hooks/useCart'
+import { priceFormatter } from '../../utils/formatter'
+import * as S from './styles'
 
 export function Cart() {
   const [isSuccess, setIsSuccess] = useState(false)
+
+  const {
+    paymentType,
+    totalProducts,
+    deliveryFee,
+    updatePaymentType,
+    cartProducts,
+    updateCartProductQuantity,
+    removeProductFromCart,
+  } = useCart()
 
   return isSuccess ? (
     <Success />
@@ -68,15 +78,27 @@ export function Cart() {
             </div>
           </S.SectionHeader>
           <S.PaymentTypes>
-            <S.PaymentButton>
+            <S.PaymentButton
+              type="button"
+              onClick={() => updatePaymentType('credit-card')}
+              className={paymentType === 'credit-card' ? 'active' : ''}
+            >
               <CreditCard size={16} />
               Cartão de crédito
             </S.PaymentButton>
-            <S.PaymentButton>
+            <S.PaymentButton
+              type="button"
+              onClick={() => updatePaymentType('debit-card')}
+              className={paymentType === 'debit-card' ? 'active' : ''}
+            >
               <Bank size={16} />
               Cartão de débito
             </S.PaymentButton>
-            <S.PaymentButton>
+            <S.PaymentButton
+              type="button"
+              onClick={() => updatePaymentType('money')}
+              className={paymentType === 'money' ? 'active' : ''}
+            >
               <Money size={16} />
               Dinheiro
             </S.PaymentButton>
@@ -86,63 +108,74 @@ export function Cart() {
       <S.Order>
         <Title variant="xs">Cafés selecionados</Title>
         <S.OrderItems>
-          <S.OrderItem>
-            <div>
-              <img src={cafeImg} alt="" />
-              <div>
-                <Text>Expresso Tradicional</Text>
+          {cartProducts?.length ? (
+            <>
+              {cartProducts.map((product) => (
+                <S.OrderItem key={product.id}>
+                  <div>
+                    <img src={product.image_url} alt={product.name} />
+                    <div>
+                      <Text>{product.name}</Text>
+                      <div>
+                        <InputNumber
+                          value={product.quantity}
+                          onMinusClick={() =>
+                            updateCartProductQuantity({
+                              productId: product.id,
+                              quantity: product.quantity - 1,
+                            })
+                          }
+                          onPlusClick={() =>
+                            updateCartProductQuantity({
+                              productId: product.id,
+                              quantity: product.quantity + 1,
+                            })
+                          }
+                        />
+                        <S.RemoveButton
+                          type="button"
+                          onClick={() => removeProductFromCart(product.id)}
+                        >
+                          <Trash />
+                          Remover
+                        </S.RemoveButton>
+                      </div>
+                    </div>
+                  </div>
+                  <Text variant="md" fontWeight="bold">
+                    {priceFormatter.format(product.quantity * product.price)}
+                  </Text>
+                </S.OrderItem>
+              ))}
+              <S.Total>
                 <div>
-                  <InputNumber />
-                  <S.RemoveButton>
-                    <Trash />
-                    Remover
-                  </S.RemoveButton>
+                  <Text variant="sm">Total de itens</Text>
+                  <Text variant="md">
+                    {priceFormatter.format(totalProducts)}
+                  </Text>
                 </div>
-              </div>
-            </div>
-            <Text variant="md" fontWeight="bold">
-              R$ 9,90
-            </Text>
-          </S.OrderItem>
-          <S.OrderItem>
-            <div>
-              <img src={cafeImg} alt="" />
-              <div>
-                <Text>Expresso Tradicional</Text>
                 <div>
-                  <InputNumber />
-                  <S.RemoveButton>
-                    <Trash />
-                    Remover
-                  </S.RemoveButton>
+                  <Text variant="sm">Entrega</Text>
+                  <Text variant="md">{priceFormatter.format(deliveryFee)}</Text>
                 </div>
-              </div>
-            </div>
-            <Text variant="md" fontWeight="bold">
-              R$ 9,90
+                <div>
+                  <Text variant="lg" fontWeight="bold">
+                    Total
+                  </Text>
+                  <Text variant="lg" fontWeight="bold">
+                    {priceFormatter.format(totalProducts + deliveryFee)}
+                  </Text>
+                </div>
+              </S.Total>
+              <S.ConfirmButton type="button" onClick={() => setIsSuccess(true)}>
+                Confirmar Pedido
+              </S.ConfirmButton>
+            </>
+          ) : (
+            <Text variant="lg" fontWeight="bold">
+              Seu carrinho está vazio...
             </Text>
-          </S.OrderItem>
-          <S.Total>
-            <div>
-              <Text variant="sm">Total de itens</Text>
-              <Text variant="md">R$ 29,70</Text>
-            </div>
-            <div>
-              <Text variant="sm">Entrega</Text>
-              <Text variant="md">R$ 3,50</Text>
-            </div>
-            <div>
-              <Text variant="lg" fontWeight="bold">
-                Total
-              </Text>
-              <Text variant="lg" fontWeight="bold">
-                R$ 33,20
-              </Text>
-            </div>
-          </S.Total>
-          <S.ConfirmButton type="button" onClick={() => setIsSuccess(true)}>
-            Confirmar Pedido
-          </S.ConfirmButton>
+          )}
         </S.OrderItems>
       </S.Order>
     </S.Container>

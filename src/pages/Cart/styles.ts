@@ -106,7 +106,7 @@ export const PaymentButton = styled.button`
     color: ${(props) => props.theme.purple};
   }
 
-  &:not(:disabled):hover {
+  &:not(:disabled, .active):hover {
     background: ${(props) => props.theme.baseHover};
   }
 

@@ -5,22 +5,22 @@ import { Title } from '../../../../components/Title'
 import { priceFormatter } from '../../../../utils/formatter'
 
 import * as S from './styles'
-
-export type Coffee = {
-  id: number
-  name: string
-  description: string
-  categories: string[]
-  price: number
-  image_url: string
-  quantity: number
-}
+import {
+  Product,
+  UpdateProductQuantityData,
+} from '../../../../contexts/ProductsContext'
 
 export type CoffeeProps = {
-  coffee: Coffee
+  coffee: Product
+  onUpdateProductQuantity: (data: UpdateProductQuantityData) => void
+  onAddProductToCart: (product: Product) => void
 }
 
-export function CoffeeCard({ coffee }: CoffeeProps) {
+export function CoffeeCard({
+  coffee,
+  onUpdateProductQuantity,
+  onAddProductToCart,
+}: CoffeeProps) {
   return (
     <S.Coffee>
       <img src={coffee.image_url} alt={coffee.name} />
@@ -38,8 +38,25 @@ export function CoffeeCard({ coffee }: CoffeeProps) {
           {priceFormatter.format(coffee.price)}
         </Title>
         <div>
-          <InputNumber />
-          <S.AddToCartButton>
+          <InputNumber
+            value={coffee.quantity}
+            onMinusClick={() =>
+              onUpdateProductQuantity({
+                productId: coffee.id,
+                quantity: coffee.quantity - 1,
+              })
+            }
+            onPlusClick={() =>
+              onUpdateProductQuantity({
+                productId: coffee.id,
+                quantity: coffee.quantity + 1,
+              })
+            }
+          />
+          <S.AddToCartButton
+            type="button"
+            onClick={() => onAddProductToCart(coffee)}
+          >
             <ShoppingCartSimple size={22} weight="fill" />
           </S.AddToCartButton>
         </div>
