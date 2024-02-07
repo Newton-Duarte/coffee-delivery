@@ -21,8 +21,8 @@ export default function Success() {
               </div>
               <div>
                 <Text variant="md">
-                  Entrega em Rua João Daniel Martinelli, 102 <br /> Farrapos -
-                  Porto Alegre, RS
+                  Entrega em Rua João Daniel Martinelli, 102 <br /> Centro -
+                  Maceió, AL
                 </Text>
               </div>
             </div>
