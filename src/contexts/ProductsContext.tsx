@@ -41,8 +41,6 @@ export function ProductsContextProvider({ children }: PropsWithChildren) {
     )
   }
 
-  console.log(products)
-
   return (
     <ProductsContext.Provider value={{ products, updateProductQuantity }}>
       {children}
