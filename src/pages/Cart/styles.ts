@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 import { BaseButton } from '../../components/BaseButton'
+import * as RadioGroup from '@radix-ui/react-radio-group'
 
-export const Container = styled.div`
+export const Container = styled.form`
   max-width: 70rem;
   margin: 0 auto;
   display: grid;
@@ -17,7 +18,7 @@ export const DeliveryAddress = styled.div`
   margin-top: 1rem;
   margin-bottom: 0.75rem;
 
-  form {
+  section {
     margin-top: 2rem;
 
     input {
@@ -54,6 +55,12 @@ export const FormRow = styled.div`
   margin-top: 1rem;
 `
 
+export const FormHelperText = styled.p`
+  font-size: 0.75rem;
+  color: ${(props) => props.theme.yellowDark};
+  padding: 0.5rem;
+`
+
 export const SectionHeader = styled.div`
   display: flex;
   gap: 0.5rem;
@@ -79,14 +86,14 @@ export const Payment = styled.div`
   }
 `
 
-export const PaymentTypes = styled.div`
+export const PaymentTypes = styled(RadioGroup.Root)`
   display: flex;
   align-items: center;
   gap: 0.75rem;
   margin-top: 2rem;
 `
 
-export const PaymentButton = styled.button`
+export const PaymentButton = styled(RadioGroup.Item)`
   display: flex;
   align-items: flex;
   flex: 1;
@@ -106,11 +113,11 @@ export const PaymentButton = styled.button`
     color: ${(props) => props.theme.purple};
   }
 
-  &:not(:disabled, .active):hover {
+  &:not(:disabled, [data-state='unchecked']):hover {
     background: ${(props) => props.theme.baseHover};
   }
 
-  &.active {
+  &[data-state='checked'] {
     background: ${(props) => props.theme.purpleLight};
     border-color: ${(props) => props.theme.purple};
   }

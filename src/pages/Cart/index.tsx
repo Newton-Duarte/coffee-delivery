@@ -14,25 +14,52 @@ import { InputNumber } from '../../components/InputNumber'
 import { useState } from 'react'
 import { useCart } from '../../hooks/useCart'
 import { priceFormatter } from '../../utils/formatter'
+import * as zod from 'zod'
 import * as S from './styles'
+import { Controller, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+const cartFormSchema = zod.object({
+  cep: zod.string().min(8, 'CEP Inválido'),
+  rua: zod.string().min(1, 'Campo obrigatório'),
+  numero: zod.string().min(1, 'Campo obrigatório'),
+  complemento: zod.string(),
+  bairro: zod.string().min(1, 'Campo obrigatório'),
+  cidade: zod.string().min(1, 'Campo obrigatório'),
+  uf: zod.string().min(1, 'Campo obrigatório'),
+  pagamento: zod.enum(['credit-card', 'debit-card', 'money']),
+})
+
+type CartFormData = zod.infer<typeof cartFormSchema>
 
 export function Cart() {
   const [isSuccess, setIsSuccess] = useState(false)
 
   const {
-    paymentType,
+    control,
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<CartFormData>({
+    resolver: zodResolver(cartFormSchema),
+  })
+
+  const {
     totalProducts,
     deliveryFee,
-    updatePaymentType,
     cartProducts,
     updateCartProductQuantity,
     removeProductFromCart,
   } = useCart()
 
+  const createOrder = (data: CartFormData) => {
+    setIsSuccess(true)
+  }
+
   return isSuccess ? (
     <Success />
   ) : (
-    <S.Container>
+    <S.Container onSubmit={handleSubmit(createOrder)}>
       <S.CompleteOrder>
         <Title variant="xs">Complete seu pedido</Title>
         <S.DeliveryAddress>
@@ -45,27 +72,60 @@ export function Cart() {
               </Text>
             </div>
           </S.SectionHeader>
-          <form>
-            <input type="text" placeholder="CEP" />
-            <input type="text" placeholder="Rua" className="form-control" />
+          <section>
+            <input
+              type="text"
+              placeholder="CEP"
+              required
+              {...register('cep')}
+            />
+            {!!errors.cep && (
+              <S.FormHelperText>{errors.cep.message}</S.FormHelperText>
+            )}
+            <input
+              type="text"
+              placeholder="Rua"
+              className="form-control"
+              required
+              {...register('rua')}
+            />
             <S.FormRow>
-              <input type="text" placeholder="Número" />
+              <input
+                type="text"
+                placeholder="Número"
+                required
+                {...register('numero')}
+              />
               <input
                 type="text"
                 placeholder="Complemento"
                 className="form-control"
+                {...register('complemento')}
               />
             </S.FormRow>
             <S.FormRow>
-              <input type="text" placeholder="Bairro" />
+              <input
+                type="text"
+                placeholder="Bairro"
+                required
+                {...register('bairro')}
+              />
               <input
                 type="text"
                 placeholder="Cidade"
                 className="form-control"
+                required
+                {...register('cidade')}
               />
-              <input type="text" placeholder="UF" className="uf" />
+              <input
+                type="text"
+                placeholder="UF"
+                className="uf"
+                required
+                {...register('uf')}
+              />
             </S.FormRow>
-          </form>
+          </section>
         </S.DeliveryAddress>
         <S.Payment>
           <S.SectionHeader>
@@ -77,32 +137,32 @@ export function Cart() {
               </Text>
             </div>
           </S.SectionHeader>
-          <S.PaymentTypes>
-            <S.PaymentButton
-              type="button"
-              onClick={() => updatePaymentType('credit-card')}
-              className={paymentType === 'credit-card' ? 'active' : ''}
-            >
-              <CreditCard size={16} />
-              Cartão de crédito
-            </S.PaymentButton>
-            <S.PaymentButton
-              type="button"
-              onClick={() => updatePaymentType('debit-card')}
-              className={paymentType === 'debit-card' ? 'active' : ''}
-            >
-              <Bank size={16} />
-              Cartão de débito
-            </S.PaymentButton>
-            <S.PaymentButton
-              type="button"
-              onClick={() => updatePaymentType('money')}
-              className={paymentType === 'money' ? 'active' : ''}
-            >
-              <Money size={16} />
-              Dinheiro
-            </S.PaymentButton>
-          </S.PaymentTypes>
+          <Controller
+            control={control}
+            name="pagamento"
+            render={({ field }) => (
+              <S.PaymentTypes
+                value={field.value}
+                onValueChange={field.onChange}
+              >
+                <S.PaymentButton value="credit-card">
+                  <CreditCard size={16} />
+                  Cartão de crédito
+                </S.PaymentButton>
+                <S.PaymentButton value="debit-card">
+                  <Bank size={16} />
+                  Cartão de débito
+                </S.PaymentButton>
+                <S.PaymentButton value="money">
+                  <Money size={16} />
+                  Dinheiro
+                </S.PaymentButton>
+              </S.PaymentTypes>
+            )}
+          />
+          {!!errors.pagamento && (
+            <S.FormHelperText>Informe o tipo de pagamento</S.FormHelperText>
+          )}
         </S.Payment>
       </S.CompleteOrder>
       <S.Order>
@@ -167,7 +227,7 @@ export function Cart() {
                   </Text>
                 </div>
               </S.Total>
-              <S.ConfirmButton type="button" onClick={() => setIsSuccess(true)}>
+              <S.ConfirmButton type="submit" disabled={isSubmitting}>
                 Confirmar Pedido
               </S.ConfirmButton>
             </>
