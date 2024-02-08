@@ -56,6 +56,10 @@ export const AddToCartButton = styled(BaseButton)`
   svg {
     color: ${(props) => props.theme.white};
   }
+
+  &:not(:disabled):hover {
+    background-color: ${(props) => props.theme.purple};
+  }
 `
 
 export const Chip = styled.span`
