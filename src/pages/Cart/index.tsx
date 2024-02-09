@@ -48,12 +48,26 @@ export function Cart() {
     totalProducts,
     deliveryFee,
     cartProducts,
+    updatePaymentType,
     updateCartProductQuantity,
+    updateDeliveryAddress,
     removeProductFromCart,
+    resetCartProducts,
   } = useCart()
 
   const createOrder = (data: CartFormData) => {
     setIsSuccess(true)
+    updatePaymentType(data.pagamento)
+    updateDeliveryAddress({
+      cep: data.cep,
+      rua: data.rua,
+      numero: data.numero,
+      complemento: data.complemento,
+      bairro: data.bairro,
+      cidade: data.cidade,
+      uf: data.uf,
+    })
+    resetCartProducts()
   }
 
   return isSuccess ? (

@@ -3,16 +3,29 @@ import { Product, UpdateProductQuantityData } from './ProductsContext'
 
 export type PaymentType = 'credit-card' | 'debit-card' | 'money'
 
+type DeliveryAddress = {
+  cep: string
+  rua: string
+  numero: string
+  complemento?: string
+  bairro: string
+  cidade: string
+  uf: string
+}
+
 type CartContextData = {
   cartProducts: Product[]
   paymentType: PaymentType
   totalProducts: number
   totalProductsQuantity: number
   deliveryFee: number
+  deliveryAddress: DeliveryAddress
   addProductToCart: (product: Product) => void
   updateCartProductQuantity: (data: UpdateProductQuantityData) => void
   removeProductFromCart: (productId: number) => void
   updatePaymentType: (paymentType: PaymentType) => void
+  updateDeliveryAddress: (deliveryAddress: DeliveryAddress) => void
+  resetCartProducts: () => void
 }
 
 export const CartContext = createContext({} as CartContextData)
@@ -20,6 +33,9 @@ export const CartContext = createContext({} as CartContextData)
 export function CartContextProvider({ children }: PropsWithChildren) {
   const [paymentType, setPaymentType] = useState<PaymentType>('credit-card')
   const [cartProducts, setCartProducts] = useState<Product[]>([])
+  const [deliveryAddress, setDeliveryAddress] = useState<DeliveryAddress>(
+    {} as DeliveryAddress,
+  )
 
   const totalProducts = cartProducts.reduce((total, product) => {
     return total + product.quantity * product.price
@@ -60,6 +76,14 @@ export function CartContextProvider({ children }: PropsWithChildren) {
     setPaymentType(paymentType)
   }
 
+  function updateDeliveryAddress(deliveryAddress: DeliveryAddress) {
+    setDeliveryAddress({ ...deliveryAddress })
+  }
+
+  function resetCartProducts() {
+    setCartProducts([])
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -67,11 +91,14 @@ export function CartContextProvider({ children }: PropsWithChildren) {
         totalProducts,
         totalProductsQuantity,
         deliveryFee,
+        deliveryAddress,
         paymentType,
         addProductToCart,
         updateCartProductQuantity,
         removeProductFromCart,
         updatePaymentType,
+        updateDeliveryAddress,
+        resetCartProducts,
       }}
     >
       {children}

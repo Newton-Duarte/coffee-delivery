@@ -9,7 +9,7 @@ import { useCart } from '../../../../hooks/useCart'
 import { parsePaymentType } from '../../../../utils/payment'
 
 export function Success() {
-  const { paymentType } = useCart()
+  const { deliveryAddress, paymentType } = useCart()
 
   return (
     <S.Container>
@@ -26,8 +26,11 @@ export function Success() {
               </div>
               <div>
                 <Text variant="md">
-                  Entrega em Rua João Daniel Martinelli, 102 <br /> Centro -
-                  Maceió, AL
+                  Entrega em {deliveryAddress.rua}, {deliveryAddress.numero}{' '}
+                  <br />{' '}
+                  {!!deliveryAddress.complemento && deliveryAddress.complemento}
+                  <br /> {deliveryAddress.bairro} - {deliveryAddress.cidade},{' '}
+                  {deliveryAddress.uf}
                 </Text>
               </div>
             </div>
