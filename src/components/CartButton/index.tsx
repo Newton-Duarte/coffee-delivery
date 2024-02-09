@@ -12,7 +12,7 @@ export function CartButton() {
 
   return (
     <S.Container>
-      <S.Badge>{totalProductsLabel}</S.Badge>
+      {!!totalProductsQuantity && <S.Badge>{totalProductsLabel}</S.Badge>}
       <ShoppingCart size={22} weight="fill" />
     </S.Container>
   )
