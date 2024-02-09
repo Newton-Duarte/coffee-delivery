@@ -7,6 +7,7 @@ type CartContextData = {
   cartProducts: Product[]
   paymentType: PaymentType
   totalProducts: number
+  totalProductsQuantity: number
   deliveryFee: number
   addProductToCart: (product: Product) => void
   updateCartProductQuantity: (data: UpdateProductQuantityData) => void
@@ -22,6 +23,10 @@ export function CartContextProvider({ children }: PropsWithChildren) {
 
   const totalProducts = cartProducts.reduce((total, product) => {
     return total + product.quantity * product.price
+  }, 0)
+
+  const totalProductsQuantity = cartProducts.reduce((total, product) => {
+    return total + product.quantity
   }, 0)
 
   const deliveryFee = 5
@@ -60,6 +65,7 @@ export function CartContextProvider({ children }: PropsWithChildren) {
       value={{
         cartProducts,
         totalProducts,
+        totalProductsQuantity,
         deliveryFee,
         paymentType,
         addProductToCart,
