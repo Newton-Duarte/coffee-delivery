@@ -7,7 +7,7 @@ export const coffees: Product[] = [
     description: 'O tradicional café feito com água quente e grãos moídos',
     categories: ['Tradicional'],
     price: 4.5,
-    image_url: '/src/assets/cafe-expresso.png',
+    image_url: '/cafe-expresso.png',
     quantity: 1,
   },
   {
@@ -16,7 +16,7 @@ export const coffees: Product[] = [
     description: 'Expresso diluído, menos intenso que o tradicional',
     categories: ['Tradicional'],
     price: 5.5,
-    image_url: '/src/assets/cafe-americano.png',
+    image_url: '/cafe-americano.png',
     quantity: 1,
   },
   {
@@ -25,7 +25,7 @@ export const coffees: Product[] = [
     description: 'Café expresso tradicional com espuma cremosa',
     categories: ['Tradicional'],
     price: 6,
-    image_url: '/src/assets/cafe-expresso-cremoso.png',
+    image_url: '/cafe-expresso-cremoso.png',
     quantity: 1,
   },
   {
@@ -34,7 +34,7 @@ export const coffees: Product[] = [
     description: 'Bebida preparada com café expresso e cubos de gelo',
     categories: ['Tradicional', 'Gelado'],
     price: 5,
-    image_url: '/src/assets/cafe-gelado.png',
+    image_url: '/cafe-gelado.png',
     quantity: 1,
   },
   {
@@ -43,7 +43,7 @@ export const coffees: Product[] = [
     description: 'Meio a meio de expresso tradicional com leite vaporizado',
     categories: ['Tradicional', 'Com Leite'],
     price: 5.79,
-    image_url: '/src/assets/cafe-com-leite.png',
+    image_url: '/cafe-com-leite.png',
     quantity: 1,
   },
   {
@@ -53,7 +53,7 @@ export const coffees: Product[] = [
       'Uma dose de café expresso com o dobro de leite e espuma cremosa',
     categories: ['Tradicional', 'Com Leite'],
     price: 6.9,
-    image_url: '/src/assets/cafe-latte.png',
+    image_url: '/cafe-latte.png',
     quantity: 1,
   },
   {
@@ -63,7 +63,7 @@ export const coffees: Product[] = [
       'Bebida com canela feita de doses iguais de café, leite e espuma',
     categories: ['Tradicional', 'Com Leite'],
     price: 8.5,
-    image_url: '/src/assets/cappuccino.png',
+    image_url: '/cappuccino.png',
     quantity: 1,
   },
   {
@@ -73,7 +73,7 @@ export const coffees: Product[] = [
       'Café expresso misturado com um pouco de leite quente e espuma',
     categories: ['Tradicional', 'Com Leite'],
     price: 9,
-    image_url: '/src/assets/cafe-macchiato.png',
+    image_url: '/cafe-macchiato.png',
     quantity: 1,
   },
   {
@@ -82,7 +82,7 @@ export const coffees: Product[] = [
     description: 'Café expresso com calda de chocolate, pouco leite e espuma',
     categories: ['Tradicional', 'Com Leite'],
     price: 10.25,
-    image_url: '/src/assets/cafe-mocaccino.png',
+    image_url: '/cafe-mocaccino.png',
     quantity: 1,
   },
   {
@@ -92,7 +92,7 @@ export const coffees: Product[] = [
       'OBebida feita com chocolate dissolvido no leite quente e café',
     categories: ['Especial', 'Com Leite'],
     price: 8.75,
-    image_url: '/src/assets/chocolate-quente.png',
+    image_url: '/chocolate-quente.png',
     quantity: 1,
   },
   {
@@ -102,7 +102,7 @@ export const coffees: Product[] = [
       'Drink gelado de café expresso com rum, creme de leite e hortelã',
     categories: ['Especial', 'Alcoólico', 'Gelado'],
     price: 11.5,
-    image_url: '/src/assets/cafe-cubano.png',
+    image_url: '/cafe-cubano.png',
     quantity: 1,
   },
   {
@@ -111,7 +111,7 @@ export const coffees: Product[] = [
     description: 'Bebida adocicada preparada com café e leite de coco',
     categories: ['Especial'],
     price: 7.25,
-    image_url: '/src/assets/cafe-havaiano.png',
+    image_url: '/cafe-havaiano.png',
     quantity: 1,
   },
   {
@@ -120,7 +120,7 @@ export const coffees: Product[] = [
     description: 'Bebida preparada com grãos de café árabe e especiarias',
     categories: ['Especial'],
     price: 15,
-    image_url: '/src/assets/cafe-arabe.png',
+    image_url: '/cafe-arabe.png',
     quantity: 1,
   },
   {
@@ -129,7 +129,7 @@ export const coffees: Product[] = [
     description: 'Bebida a base de café, uísque irlandês, açúcar e chantilly',
     categories: ['Especial', 'Alcoólico'],
     price: 8.9,
-    image_url: '/src/assets/cafe-irlandes.png',
+    image_url: '/cafe-irlandes.png',
     quantity: 1,
   },
 ]
